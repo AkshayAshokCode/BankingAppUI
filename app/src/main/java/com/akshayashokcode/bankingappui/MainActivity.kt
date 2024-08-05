@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
     private fun HomeScreen() {
        Scaffold(
            bottomBar ={
-            //    BottomNavigationBar()
+                BottomNavigationBar()
            }
        ) { padding ->
 
