@@ -58,7 +58,7 @@ class MainActivity : ComponentActivity() {
                    .fillMaxSize()
                    .padding(padding)
            ){
-               //   WalletSection()
+                  WalletSection()
                //   CardsSection()
                Spacer(modifier = Modifier.height(16.dp))
                //   FinanceSection()
