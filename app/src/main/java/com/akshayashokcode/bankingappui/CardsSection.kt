@@ -1,15 +1,37 @@
 package com.akshayashokcode.bankingappui
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.akshayashokcode.bankingappui.data.Card
-import com.akshayashokcode.bankingappui.ui.theme.Pink40
-import com.akshayashokcode.bankingappui.ui.theme.Pink80
-import com.akshayashokcode.bankingappui.ui.theme.Purple40
-import com.akshayashokcode.bankingappui.ui.theme.Purple80
-import com.akshayashokcode.bankingappui.ui.theme.PurpleGrey40
-import com.akshayashokcode.bankingappui.ui.theme.PurpleGrey80
+import com.akshayashokcode.bankingappui.ui.theme.BlueEnd
+import com.akshayashokcode.bankingappui.ui.theme.BlueStart
+import com.akshayashokcode.bankingappui.ui.theme.GreenEnd
+import com.akshayashokcode.bankingappui.ui.theme.GreenStart
+import com.akshayashokcode.bankingappui.ui.theme.OrangeEnd
+import com.akshayashokcode.bankingappui.ui.theme.OrangeStart
+import com.akshayashokcode.bankingappui.ui.theme.PurpleEnd
+import com.akshayashokcode.bankingappui.ui.theme.PurpleStart
 
 
 val cards = listOf(
@@ -18,28 +40,28 @@ val cards = listOf(
         cardNumber = "**** **** **** 3421",
         cardName = "Business",
         balance = 46.674,
-        color = getGradient(Purple40, Purple80)
+        color = getGradient(PurpleStart, PurpleEnd)
     ),
     Card(
-        cardType = "MASTERCARD",
+        cardType = "MASTER_CARD",
         cardNumber = "**** **** **** 5454",
         cardName = "Saving",
         balance = 146.674,
-        color = getGradient(PurpleGrey40, PurpleGrey80)
+        color = getGradient(BlueStart, BlueEnd)
     ),
     Card(
         cardType = "Visa",
         cardNumber = "**** **** **** 9890",
         cardName = "School",
         balance = 6.674,
-        color = getGradient(Pink40, Pink80)
+        color = getGradient(OrangeStart, OrangeEnd)
     ),
     Card(
         cardType = "Visa",
         cardNumber = "**** **** **** 8765",
         cardName = "Business",
         balance = 4.674,
-        color = getGradient(Purple40, Purple80)
+        color = getGradient(GreenStart, GreenEnd)
     ),
 )
 
@@ -51,5 +73,67 @@ fun getGradient(
 }
 @Composable
 fun CardsSection() {
+    LazyRow {
+        items(cards.size) { index ->
+            CardItem(index)
+        }
+    }
+}
+
+@Composable
+fun CardItem(index: Int) {
+    val card = cards[index]
+    var lastItemPaddingEnd = 0.dp
+    if(index == cards.size - 1) {
+        lastItemPaddingEnd = 16.dp
+    }
+
+    var image = painterResource(id = R.drawable.ic_visa)
+    if(card.cardType == "MASTER_CARD") {
+        image = painterResource(id = R.drawable.ic_mastercard)
+    }
+
+    Box(modifier = Modifier
+        .padding(start = 16.dp, end = lastItemPaddingEnd)
+    ){
+        Column(modifier = Modifier
+            .clip(RoundedCornerShape(15.dp))
+            .background(card.color)
+            .width(250.dp)
+            .height(160.dp)
+            .clickable { }
+            .padding(vertical = 12.dp, horizontal = 16.dp),
+            verticalArrangement = Arrangement.SpaceBetween
+        ){
+            Image(
+                painter = image,
+                contentDescription = card.cardName,
+                modifier = Modifier.width(60.dp)
+            )
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Text(
+                text = card.cardName,
+                color = Color.White,
+                fontSize = 17.sp,
+                fontWeight = FontWeight.Bold
+            )
+
+            Text(
+                text = "$ ${card.balance}",
+                color = Color.White,
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold
+            )
+
+            Text(
+                text = card.cardNumber,
+                color = Color.White,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+    }
 
 }
