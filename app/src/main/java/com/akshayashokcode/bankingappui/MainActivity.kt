@@ -59,7 +59,7 @@ class MainActivity : ComponentActivity() {
                    .padding(padding)
            ){
                   WalletSection()
-               //   CardsSection()
+                  CardsSection()
                Spacer(modifier = Modifier.height(16.dp))
                //   FinanceSection()
                //   Currencies Section()
