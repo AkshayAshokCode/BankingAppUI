@@ -62,7 +62,7 @@ class MainActivity : ComponentActivity() {
                   CardsSection()
                Spacer(modifier = Modifier.height(16.dp))
                   FinanceSection()
-               //   Currencies Section()
+                  CurrenciesSection()
            }
 
 
